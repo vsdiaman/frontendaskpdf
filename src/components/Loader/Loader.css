@@ -1,0 +1,18 @@
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+.span {
+  color: #3b3b3b54; /* Ajuste a cor conforme necessário */
+  font-size: 16px; /* Ajuste o tamanho da fonte conforme necessário */
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+}
