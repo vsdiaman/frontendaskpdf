@@ -53,22 +53,24 @@ const Main = () => {
   };
 
   return (
-    <div className="h-screen bg-gradient-animation flex flex-col items-center">
-      <div className="mt-[100px]">
-        <div className="text-center mb-12">
-          <h1 className="text-6xl font-bold text-gray-800 mb-4">
+    <div className="h-screen bg-gradient-animation flex flex-col items-center justify-center p-4">
+      <div className="w-full max-w-4xl text-center">
+        <div className="mb-8">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-4">
             Chat with any PDF
           </h1>
-          <p className="text-lg text-zinc-200 font-bold">
+          <p className="text-sm sm:text-base md:text-lg text-zinc-100 font-mono">
             Join millions of students, researchers, and professionals to
           </p>
-          <p className="text-lg text-zinc-200 font-bold">
+          <p className="text-sm sm:text-base md:text-lg text-zinc-100 font-mono">
             instantly answer questions and understand research with AI
           </p>
         </div>
         <div
-          className={`drop-area flex flex-col items-center ${
-            dragging ? "bg-blue-100 border-blue-500" : ""
+          className={`drop-area ${
+            dragging
+              ? "bg-blue-100 border-blue-500"
+              : "bg-white border-gray-300"
           }`}
           onClick={handleClick}
           onDragOver={handleDragOver}
@@ -83,38 +85,28 @@ const Main = () => {
             onChange={handleFileChange}
             accept=".pdf"
           />
-          <div className="inset-0 flex items-center justify-center">
-            {uploading ? (
-              <div>Uploading...</div>
-            ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-12 h-12 text-gray-500"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M9 8.25H7.5a2.25 2.25 0 0 0-2.25 2.25v9a2.25 2.25 0 0 0 2.25 2.25h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25H15m0-3-3-3m0 0-3 3m3-3V15"
-                />
-              </svg>
-            )}
+          <div className="flex items-center justify-center mb-4">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-12 h-12 text-gray-500"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M9 8.25H7.5a2.25 2.25 0 0 0-2.25 2.25v9a2.25 2.25 0 0 0 2.25 2.25h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25H15m0-3-3-3m0 0-3 3m3-3V15"
+              />
+            </svg>
           </div>
-          <div className="flex flex-col items-center">
-            <div className="text-gray-600 text-xl">Drop PDF here</div>
+          <div className="text-center">
+            <div className="text-gray-600 text-lg sm:text-xl">
+              Drop PDF here or click to upload
+            </div>
           </div>
         </div>
-        ch
-        {fileUrl && (
-          <div className="mt-4">
-            <a href={fileUrl} target="_blank" rel="noopener noreferrer">
-              View Uploaded PDF
-            </a>
-          </div>
-        )}
       </div>
     </div>
   );

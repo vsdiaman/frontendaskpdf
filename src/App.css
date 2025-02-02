@@ -28,8 +28,10 @@
 
 /* Estilo para a área de drop */
 .drop-area {
-  width: 800px;
-  height: 200px;
+  width: 100%; /* Largura total */
+  max-width: 800px; /* Largura máxima */
+  height: auto; /* Altura automática */
+  min-height: 150px; /* Altura mínima */
   position: relative;
   background: white;
   border-radius: 8px; /* Borda arredondada */
@@ -40,7 +42,7 @@
   justify-content: center;
   cursor: pointer; /* Muda o cursor para indicar que é clicável */
   overflow: hidden; /* Garante que o pseudo-elemento não transborde */
-  /* Para garantir que o pseudo-elemento esteja acima da área */
+  margin: 0 auto; /* Centraliza a área de drop */
   z-index: 1;
 }
 
@@ -48,10 +50,10 @@
 .drop-area::before {
   content: "";
   position: absolute;
-  top: 5px; /* Distância da borda */
-  left: 5px; /* Distância da borda */
-  right: 5px; /* Distância da borda */
-  bottom: 5px; /* Distância da borda */
+  top: 10px; /* Distância da borda */
+  left: 10px; /* Distância da borda */
+  right: 10px; /* Distância da borda */
+  bottom: 10px; /* Distância da borda */
   border: 1px dashed #ccc; /* Borda pontilhada */
   border-radius: 8px; /* Borda arredondada */
   pointer-events: none; /* Permite cliques passarem para o elemento pai */
@@ -65,7 +67,6 @@
 }
 
 .drop-area svg {
-  /* padding-top: 1px; */
   color: #4a90e2;
 }
 

@@ -13,29 +13,67 @@ export const UPLOAD_FILE_REQUEST = "UPLOAD_FILE_REQUEST";
 export const UPLOAD_FILE_SUCCESS = "UPLOAD_FILE_SUCCESS";
 export const UPLOAD_FILE_FAILURE = "UPLOAD_FILE_FAILURE";
 
+// export const uploadFile = (file) => async (dispatch) => {
+//   try {
+//     const pdfId = uuidv4();
+//     const fileRef = ref(storage, `pdfs/${pdfId}_${file.name}`);
+
+//     const metadata = {
+//       customMetadata: {
+//         uploadDate: new Date().toISOString(),
+//         pdfId: pdfId, // Adiciona a data de upload
+//       },
+//     };
+//     await uploadBytes(fileRef, file, metadata);
+//     console.log("File uploaded with metadata");
+
+//     const url = await getDownloadURL(fileRef);
+
+//     dispatch({
+//       type: "UPLOAD_FILE_SUCCESS",
+//       payload: { fileUrl: url, pdfId: pdfId },
+//     }); // Atualize o estado com a URL e pdfId
+//   } catch (error) {
+//     console.error("Error uploading file:", error);
+//     dispatch({ type: "UPLOAD_FILE_FAILURE", payload: error.message });
+//   }
+// };
+
 export const uploadFile = (file) => async (dispatch) => {
+  const formData = new FormData();
+  formData.append("file", file);
+
   try {
-    const pdfId = uuidv4();
-    const fileRef = ref(storage, `pdfs/${pdfId}_${file.name}`);
+    dispatch({ type: "UPLOAD_FILE_REQUEST" });
 
-    const metadata = {
-      customMetadata: {
-        uploadDate: new Date().toISOString(),
-        pdfId: pdfId, // Adiciona a data de upload
-      },
-    };
-    await uploadBytes(fileRef, file, metadata);
-    console.log("File uploaded with metadata");
+    const response = await fetch("http://localhost:4000/files/upload", {
+      method: "POST",
+      body: formData,
+    });
 
-    const url = await getDownloadURL(fileRef);
+    if (!response.ok) {
+      throw new Error(`Erro ao enviar o arquivo: ${response.statusText}`);
+    }
+
+    const data = await response.json();
 
     dispatch({
       type: "UPLOAD_FILE_SUCCESS",
-      payload: { fileUrl: url, pdfId: pdfId },
-    }); // Atualize o estado com a URL e pdfId
+      payload: {
+        fileUrl: data.url, // URL do JSON salvo no Firebase
+        pdfId: data.fileName, // Nome do arquivo salvo
+        pdfText: data.pdfText, // 🔥 Salva o texto extraído no Redux
+      },
+    });
+
+    console.log("📄 Arquivo salvo:", data);
   } catch (error) {
-    console.error("Error uploading file:", error);
-    dispatch({ type: "UPLOAD_FILE_FAILURE", payload: error.message });
+    dispatch({
+      type: "UPLOAD_FILE_FAILURE",
+      payload: { error: error.message },
+    });
+
+    console.error("❌ Erro no upload:", error);
   }
 };
 

@@ -11,6 +11,7 @@ const initialState = {
   error: null,
   uploading: false,
   pdfList: [],
+  pdfText: "",
 };
 
 const fileReducer = (state = initialState, action) => {
@@ -47,8 +48,10 @@ const fileReducer = (state = initialState, action) => {
         uploading: false,
         fileUrl: action.payload.fileUrl,
         pdfId: action.payload.pdfId,
-        latestPdfUrl: action.payload.fileUrl, // Atualiza a URL mais recente
+        latestPdfUrl: action.payload.fileUrl,
+        pdfText: action.payload.pdfText, // 🔥 Salva o texto do PDF
       };
+
     case "UPLOAD_FILE_FAILURE":
       return { ...state, uploading: false, error: action.payload.error };
 
