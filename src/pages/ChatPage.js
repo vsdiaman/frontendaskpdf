@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { fetchPdfList, uploadFile } from "../redux/actions/fileActions";
 import { useSelector, useDispatch } from "react-redux";
@@ -6,9 +6,11 @@ import { ArrowLeft } from "lucide-react"; // Ícone da seta
 import { useLocation } from "react-router-dom";
 import { Worker, Viewer } from "@react-pdf-viewer/core";
 import axios from "axios";
+import { Linkedin, Instagram } from "lucide-react";
 import "@react-pdf-viewer/core/lib/styles/index.css";
 
 const ChatPage = () => {
+  const messagesEndRef = useRef(null);
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -26,10 +28,14 @@ const ChatPage = () => {
   const [uploadedPdfId, setUploadedPdfId] = useState(initialPdfId || pdfId);
 
   const pdfjsVersion = "2.16.105";
+  const [isLoading, setIsLoading] = useState(false);
 
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState("");
-
+  // Função para rolar até a última mensagem
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
   // useEffect(() => {
   //   const fetchPdfText = async () => {
   //     if (uploadedPdfId) {
@@ -46,6 +52,10 @@ const ChatPage = () => {
 
   //   fetchPdfText();
   // }, [uploadedPdfId]);
+
+  // useEffect(() => {
+  //   scrollToBottom();
+  // }, [messages]);
 
   useEffect(() => {
     // Carrega a lista de PDFs quando o componente é montado
@@ -95,6 +105,7 @@ const ChatPage = () => {
 
   const handleSendMessage = async (event) => {
     event.preventDefault();
+
     if (!inputValue.trim()) return;
 
     if (!pdfText || pdfText.trim() === "") {
@@ -102,77 +113,62 @@ const ChatPage = () => {
       return;
     }
 
+    // Adiciona a mensagem do usuário e um placeholder da IA com o spinner
+    setMessages((prevMessages) => [
+      ...prevMessages,
+      { text: inputValue, fromUser: true },
+      { text: "", fromUser: false, isLoading: true }, // ⬅️ Spinner aparece aqui
+    ]);
+
+    setInputValue("");
+
     try {
       const response = await axios.post(
         "http://localhost:4000/chat/completion",
-        {
-          pdfText,
-          question: inputValue,
-        }
+        { pdfText, question: inputValue }
       );
 
-      console.log("📄 Resposta do chat:", response.data);
-    } catch (error) {
-      console.error("❌ Erro ao enviar mensagem:", error);
+      console.log("Resposta da API:", response.data);
+
+      let responseMessage = response.data.Completion;
+
+      if (typeof response.data === "string") {
+        responseMessage = response.data;
+      }
+
+      if (responseMessage) {
+        setMessages((prevMessages) =>
+          prevMessages.map((msg) =>
+            msg.isLoading ? { text: responseMessage, fromUser: false } : msg
+          )
+        );
+      } else {
+        console.error(
+          "⚠️ A resposta da API está vazia ou em formato inesperado."
+        );
+      }
+    } catch (err) {
+      console.error("❌ Erro ao enviar mensagem:", err);
     }
   };
 
-  return (
-    <div className="flex h-screen overflow-hidden p-4">
-      {/* Sidebar */}
-      <div className="w-2/4 bg-white border-r border-gray-300">
-        <header className="p-4 border-b border-gray-300 flex justify-start items-center bg-indigo-600 text-white">
-          {/* Seta para voltar */}
-          <button onClick={() => navigate("/")} className="mr-2">
-            <ArrowLeft size={24} />
-          </button>
-          <h1 className="text-2xl font-semibold">Ask Pdf</h1>
-          <div className="relative"></div>
-        </header>
-        <div className="p-4">
-          {isUploading ? (
-            <p>Uploading...</p>
-          ) : uploadedPdfUrl ? (
-            <>
-              <div style={{ height: "80vh" }}>
-                <div className="p-4">
-                  {messages.length > 0 ? (
-                    messages.map((msg, index) => (
-                      <div
-                        key={index}
-                        className="bg-gray-200 p-3 rounded-md mb-2"
-                      >
-                        <p className="text-sm">{msg.text}</p>
-                      </div>
-                    ))
-                  ) : (
-                    <p>No content available. Please upload a PDF.</p>
-                  )}
-                </div>
+  //     console.log("📄 Resposta do chat:", response.data);
+  //   } catch (error) {
+  //     console.error("❌ Erro ao enviar mensagem:", error);
+  //   }
+  // };
 
-                {/* <Worker
-                  workerUrl={`https://unpkg.com/pdfjs-dist@${pdfjsVersion}/build/pdf.worker.min.js`}
-                >
-                  <Viewer fileUrl={uploadedPdfUrl} />
-                </Worker> */}
-              </div>
-              {/* <p>PDF ID: {uploadedPdfId}</p> */}
-            </>
-          ) : (
-            <div>No PDF available. Please upload a file.</div>
-          )}
-        </div>
-        <input
-          type="file"
-          accept="application/pdf"
-          onChange={handleFileChange}
-        />
-      </div>
-      {/* Main Chat Area */}
-      <div className="flex-1 flex flex-col h-full p-4">
+  return (
+    <div className="flex flex-col bg-gradient-animation h-screen overflow-hidden p-4">
+      <div className="flex-1 flex flex-col h-full p-4 bg-white rounded-3xl shadow-sm m-2">
         {/* Chat Header */}
-        <header className="bg-white p-4 text-gray-700">
-          <h1 className="text-2xl font-semibold">Faça uma pergunta...</h1>
+        <header className="bg-white p-2 sm:p-4 text-gray-100">
+          <h1 className="mb-2 text-xl sm:text-2xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 dark:text-white">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
+              Smarter PDFs
+            </span>
+            , Powerful AI.
+          </h1>
         </header>
 
         {/* Chat Messages */}
@@ -193,15 +189,39 @@ const ChatPage = () => {
                   />
                 </div>
               )}
+              {/* Referência para rolar automaticamente */}
+              <div ref={messagesEndRef} />
               <div
-                className={`flex max-w-max ${
+                className={`flex flex max-w-[75%] ${
                   msg.fromUser
                     ? "bg-gray-500 text-white"
                     : "bg-gray-300 text-black"
                 } rounded-lg p-3 gap-3`}
               >
-                <p>{msg.text}</p>
+                {msg.isLoading ? (
+                  <svg
+                    className="animate-spin h-5 w-5 text-gray-700"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8v8H4z"
+                    ></path>
+                  </svg>
+                ) : (
+                  <p>{msg.text}</p>
+                )}
               </div>
+
               {msg.fromUser && (
                 <div className="flex-shrink-0 w-8 h-8 rounded-full overflow-hidden ml-2">
                   <img
@@ -216,10 +236,10 @@ const ChatPage = () => {
         </div>
 
         {/* Message Input - FIXADO NA BASE */}
-        <div className="sticky bottom-0 bg-white w-full p-2 border-t border-gray-300">
+        <div className="sticky bottom-0 bg-white w-full p-4  border-gray-300">
           <form onSubmit={handleSendMessage} className="flex w-full">
             <input
-              className="bg-gray-200 py-3 w-full rounded-full text-gray placeholder-gray-400 px-2.5"
+              className="bg-gray-200 py-3 w-full rounded-full text-gray placeholder-gray-400 p-6"
               type="text"
               placeholder="Type your message here..."
               value={inputValue}
@@ -234,6 +254,60 @@ const ChatPage = () => {
           </form>
         </div>
       </div>
+
+      <footer className="bg-white rounded-3xl shadow-sm dark:bg-gray-900 m-2">
+        <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
+          <div className="flex flex-col items-center sm:flex-row sm:justify-between">
+            {/* Logo */}
+            <a
+              href="https://flowbite.com/"
+              className="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse"
+            >
+              <img
+                src="https://cdn1.iconfinder.com/data/icons/color-bold-style/21/43-512.png"
+                className="h-8"
+                alt="Flowbite Logo"
+              />
+              <span className="self-center text-xl sm:text-2xl font-semibold whitespace-nowrap dark:text-white">
+                AskPdf
+              </span>
+            </a>
+
+            {/* Ícones Sociais */}
+            <ul className="flex space-x-4">
+              <li>
+                <a
+                  href="https://www.linkedin.com/in/vitordiamantino/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Linkedin className="w-6 h-6 text-blue-600 hover:text-blue-800 transition duration-300" />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.instagram.com/vitor.diamantino/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Instagram className="w-6 h-6 text-pink-500 hover:text-pink-700 transition duration-300" />
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <hr className="my-6 border-gray-200 dark:border-gray-700 lg:my-8" />
+
+          {/* Copyright */}
+          <span className="block text-sm text-gray-500 text-center dark:text-gray-400">
+            © 2025{" "}
+            <a href="https://flowbite.com/" className="hover:underline">
+              Vitor Diamantino
+            </a>
+            . All Rights Reserved.
+          </span>
+        </div>
+      </footer>
     </div>
   );
 };
