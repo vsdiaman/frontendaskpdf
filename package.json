@@ -30,6 +30,7 @@
     "eject": "react-scripts eject"
   },
   "proxy": "https://firebasestorage.googleapis.com",
+  
   "eslintConfig": {
     "extends": [
       "react-app",

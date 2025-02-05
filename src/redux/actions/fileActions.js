@@ -13,6 +13,8 @@ export const UPLOAD_FILE_REQUEST = "UPLOAD_FILE_REQUEST";
 export const UPLOAD_FILE_SUCCESS = "UPLOAD_FILE_SUCCESS";
 export const UPLOAD_FILE_FAILURE = "UPLOAD_FILE_FAILURE";
 
+const BASE_URL = "https://backend-chatpdf-production.up.railway.app";
+
 // export const uploadFile = (file) => async (dispatch) => {
 //   try {
 //     const pdfId = uuidv4();
@@ -46,7 +48,7 @@ export const uploadFile = (file) => async (dispatch) => {
   try {
     dispatch({ type: "UPLOAD_FILE_REQUEST" });
 
-    const response = await fetch("http://localhost:4000/files/upload", {
+    const response = await fetch(`${BASE_URL}/files/upload`, {
       method: "POST",
       body: formData,
     });
