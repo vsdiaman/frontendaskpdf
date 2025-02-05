@@ -48,23 +48,37 @@ export const uploadFile = (file) => async (dispatch) => {
   try {
     dispatch({ type: "UPLOAD_FILE_REQUEST" });
 
-    const response = await fetch(`${BASE_URL}/files/upload`, {
+    const url = BASE_URL
+      ? `${BASE_URL}/files/upload`
+      : "http://localhost:4000/files/upload";
+
+    const response = await fetch(url, {
       method: "POST",
       body: formData,
+      headers: {
+        Accept: "application/json",
+      },
     });
 
     if (!response.ok) {
-      throw new Error(`Erro ao enviar o arquivo: ${response.statusText}`);
+      throw new Error(
+        `Erro ao enviar o arquivo: ${response.status} - ${response.statusText}`
+      );
     }
 
-    const data = await response.json();
+    let data;
+    try {
+      data = await response.json();
+    } catch (parseError) {
+      throw new Error("Resposta do servidor não é um JSON válido.");
+    }
 
     dispatch({
       type: "UPLOAD_FILE_SUCCESS",
       payload: {
-        fileUrl: data.url, // URL do JSON salvo no Firebase
-        pdfId: data.fileName, // Nome do arquivo salvo
-        pdfText: data.pdfText, // 🔥 Salva o texto extraído no Redux
+        fileUrl: data.url,
+        pdfId: data.fileName,
+        pdfText: data.pdfText,
       },
     });
 
@@ -72,7 +86,7 @@ export const uploadFile = (file) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "UPLOAD_FILE_FAILURE",
-      payload: { error: error.message },
+      payload: { error: error.message || "Erro desconhecido" },
     });
 
     console.error("❌ Erro no upload:", error);

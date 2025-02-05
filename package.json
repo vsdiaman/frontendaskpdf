@@ -29,8 +29,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "https://firebasestorage.googleapis.com",
-  
+  "proxy": "https://backend-chatpdf-production.up.railway.app",
   "eslintConfig": {
     "extends": [
       "react-app",
