@@ -46,10 +46,13 @@ export const uploadFile = (file) => async (dispatch) => {
   try {
     dispatch({ type: "UPLOAD_FILE_REQUEST" });
 
-    const response = await fetch("http://localhost:4000/files/upload", {
-      method: "POST",
-      body: formData,
-    });
+    const response = await fetch(
+      "http://backend-chatpdf-production.up.railway.app/files/upload",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
 
     if (!response.ok) {
       throw new Error(`Erro ao enviar o arquivo: ${response.statusText}`);
