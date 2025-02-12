@@ -47,7 +47,7 @@ export const uploadFile = (file) => async (dispatch) => {
     dispatch({ type: "UPLOAD_FILE_REQUEST" });
 
     const response = await fetch(
-      "http://backend-chatpdf-production.up.railway.app/files/upload",
+      `${process.env.REACT_APP_BACKEND_URL}/files/upload`,
       {
         method: "POST",
         body: formData,

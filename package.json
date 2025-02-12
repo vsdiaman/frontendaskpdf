@@ -9,6 +9,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.4",
+    "dotenv": "^16.4.7",
     "firebase": "^10.13.0",
     "lucide-react": "^0.474.0",
     "next-redux-wrapper": "^8.1.0",
