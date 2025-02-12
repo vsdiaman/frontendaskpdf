@@ -47,7 +47,10 @@ export const uploadFile = (file) => async (dispatch) => {
     dispatch({ type: "UPLOAD_FILE_REQUEST" });
 
     const response = await fetch(
-      `${process.env.REACT_APP_BACKEND_URL}/files/upload`,
+      console.log(
+        "BACKEND URL:",
+        process.env.REACT_APP_BACKEND_URL
+      )`${process.env.REACT_APP_BACKEND_URL}/files/upload`,
       {
         method: "POST",
         body: formData,
