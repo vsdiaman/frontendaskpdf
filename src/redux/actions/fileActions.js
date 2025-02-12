@@ -46,16 +46,13 @@ export const uploadFile = (file) => async (dispatch) => {
   try {
     dispatch({ type: "UPLOAD_FILE_REQUEST" });
 
-    const response = await fetch(
-      console.log(
-        "BACKEND URL:",
-        process.env.REACT_APP_BACKEND_URL
-      )`${process.env.REACT_APP_BACKEND_URL}/files/upload`,
-      {
-        method: "POST",
-        body: formData,
-      }
-    );
+    const backendUrl = process.env.REACT_APP_BACKEND_URL;
+    console.log("BACKEND URL:", backendUrl);
+
+    const response = await fetch(`${backendUrl}/files/upload`, {
+      method: "POST",
+      body: formData,
+    });
 
     if (!response.ok) {
       throw new Error(`Erro ao enviar o arquivo: ${response.statusText}`);
