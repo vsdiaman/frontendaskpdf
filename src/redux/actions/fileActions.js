@@ -46,7 +46,7 @@ export const uploadFile = (file) => async (dispatch) => {
   try {
     dispatch({ type: "UPLOAD_FILE_REQUEST" });
 
-    const backendUrl = process.env.REACT_APP_BACKEND_URL;
+    const backendUrl = "https://backend-chatpdf-production.up.railway.app"; // URL fixa
     console.log("BACKEND URL:", backendUrl);
 
     const response = await fetch(`${backendUrl}/files/upload`, {
