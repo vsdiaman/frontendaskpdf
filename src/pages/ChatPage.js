@@ -121,12 +121,13 @@ const ChatPage = () => {
     ]);
 
     setInputValue("");
-
+    const backendUrl = "https://backend-chatpdf-production.up.railway.app"; // URL fixa
+    console.log("BACKEND URL:", backendUrl);
     try {
-      const response = await axios.post(
-        "http://localhost:4000/chat/completion",
-        { pdfText, question: inputValue }
-      );
+      const response = await axios.post(`${backendUrl}/chat/completion`, {
+        pdfText,
+        question: inputValue,
+      });
 
       console.log("Resposta da API:", response.data);
 
