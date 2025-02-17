@@ -113,6 +113,10 @@ const Main = () => {
             </div>
           </div>
         </div>
+        <p className="text-sm sm:text-base md:text-lg text-zinc-800 font-mono">
+          OBS: APLICAÇÃO NA VERSÃO BETA, TOKENS LIMITADOS, EVITE O USO DE PDFs
+          GRANDES, OBRIGADO.
+        </p>
       </div>
     </div>
   );
