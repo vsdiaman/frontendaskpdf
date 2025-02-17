@@ -167,9 +167,9 @@ const ChatPage = () => {
         <header className="bg-white p-2 sm:p-4 text-gray-100">
           <h1 className="mb-2 text-xl sm:text-2xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 dark:text-white">
             <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
-              Smarter PDFs
+              PDFs mais inteligentes
             </span>
-            , Powerful AI.
+            , IA poderosa.
           </h1>
         </header>
 
@@ -251,7 +251,7 @@ const ChatPage = () => {
               type="submit"
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full ml-2"
             >
-              Send
+              Enviar
             </button>
           </form>
         </div>
