@@ -10,7 +10,7 @@ function App() {
 
   useEffect(() => {
     // Simula o carregamento de recursos
-    setTimeout(() => setLoading(false), 1000); // Dura 1 segundo
+    setTimeout(() => setLoading(false), 3000); // Dura 1 segundo
   }, []);
 
   return (

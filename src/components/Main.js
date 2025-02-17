@@ -3,11 +3,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { uploadFile } from "../redux/actions/fileActions";
 import useDragAndDrop from "../hooks/useDragAndDrop";
 import { useNavigate } from "react-router-dom";
+import Loader from "./Loader/Loader";
 import "../App.css";
 
 const Main = () => {
   const fileInputRef = useRef(null);
   const [dragging, setDragging] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = useDispatch();
   const { uploading, fileUrl, pdfId } = useSelector((state) => state.file);
@@ -38,6 +40,7 @@ const Main = () => {
   // };
 
   const handleFileChange = async (event) => {
+    setIsLoading(true); // Ativa o Loader
     const file = event.target.files[0];
     if (file) {
       try {
@@ -48,6 +51,8 @@ const Main = () => {
         navigate("/chat", { state: { fileUrl, pdfId } });
       } catch (error) {
         console.error("Error uploading file:", error);
+      } finally {
+        setIsLoading(false); // Desativa o Loader após a conversão
       }
     }
   };
@@ -78,6 +83,7 @@ const Main = () => {
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
         >
+          {isLoading && <Loader />} {/*Carregamento loader*/}
           <input
             type="file"
             ref={fileInputRef}
