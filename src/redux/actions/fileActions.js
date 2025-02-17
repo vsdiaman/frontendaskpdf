@@ -6,38 +6,12 @@ import {
   getMetadata,
 } from "firebase/storage";
 import { v4 as uuidv4 } from "uuid";
-
+import backendUrl from "../../config/config.js";
 import { storage } from "../../config/FirebaseConfig"; // Corrija o caminho se necessário
 
 export const UPLOAD_FILE_REQUEST = "UPLOAD_FILE_REQUEST";
 export const UPLOAD_FILE_SUCCESS = "UPLOAD_FILE_SUCCESS";
 export const UPLOAD_FILE_FAILURE = "UPLOAD_FILE_FAILURE";
-
-// export const uploadFile = (file) => async (dispatch) => {
-//   try {
-//     const pdfId = uuidv4();
-//     const fileRef = ref(storage, `pdfs/${pdfId}_${file.name}`);
-
-//     const metadata = {
-//       customMetadata: {
-//         uploadDate: new Date().toISOString(),
-//         pdfId: pdfId, // Adiciona a data de upload
-//       },
-//     };
-//     await uploadBytes(fileRef, file, metadata);
-//     console.log("File uploaded with metadata");
-
-//     const url = await getDownloadURL(fileRef);
-
-//     dispatch({
-//       type: "UPLOAD_FILE_SUCCESS",
-//       payload: { fileUrl: url, pdfId: pdfId },
-//     }); // Atualize o estado com a URL e pdfId
-//   } catch (error) {
-//     console.error("Error uploading file:", error);
-//     dispatch({ type: "UPLOAD_FILE_FAILURE", payload: error.message });
-//   }
-// };
 
 export const uploadFile = (file) => async (dispatch) => {
   const formData = new FormData();
@@ -45,8 +19,6 @@ export const uploadFile = (file) => async (dispatch) => {
 
   try {
     dispatch({ type: "UPLOAD_FILE_REQUEST" });
-
-    const backendUrl = "https://backend-chatpdf-production.up.railway.app"; // URL fixa
     console.log("BACKEND URL:", backendUrl);
 
     const response = await fetch(`${backendUrl}/files/upload`, {

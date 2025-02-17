@@ -57,13 +57,13 @@ const Main = () => {
       <div className="w-full max-w-4xl text-center">
         <div className="mb-8">
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-4">
-            Chat with any PDF
+            Converse com qualquer PDF
           </h1>
           <p className="text-sm sm:text-base md:text-lg text-zinc-100 font-mono">
-            Join millions of students, researchers, and professionals to
+            Junte-se a milhões de estudantes, pesquisadores e profissionais para
           </p>
           <p className="text-sm sm:text-base md:text-lg text-zinc-100 font-mono">
-            instantly answer questions and understand research with AI
+            responder perguntas instantaneamente e compreender pesquisas com IA
           </p>
         </div>
         <div
@@ -103,7 +103,7 @@ const Main = () => {
           </div>
           <div className="text-center">
             <div className="text-gray-600 text-lg sm:text-xl">
-              Drop PDF here or click to upload
+              Solte o PDF aqui ou clique para fazer upload
             </div>
           </div>
         </div>

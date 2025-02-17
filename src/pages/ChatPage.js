@@ -8,6 +8,7 @@ import { Worker, Viewer } from "@react-pdf-viewer/core";
 import axios from "axios";
 import { Linkedin, Instagram } from "lucide-react";
 import "@react-pdf-viewer/core/lib/styles/index.css";
+import backendUrl from "../config/config.js";
 
 const ChatPage = () => {
   const messagesEndRef = useRef(null);
@@ -121,7 +122,7 @@ const ChatPage = () => {
     ]);
 
     setInputValue("");
-    const backendUrl = "https://backend-chatpdf-production.up.railway.app"; // URL fixa
+    // const backendUrl = "https://backend-chatpdf-production.up.railway.app"; // URL fixa
     console.log("BACKEND URL:", backendUrl);
     try {
       const response = await axios.post(`${backendUrl}/chat/completion`, {
