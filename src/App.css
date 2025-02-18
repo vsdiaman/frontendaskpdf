@@ -16,14 +16,27 @@
 }
 
 .bg-gradient-animation {
-  background: linear-gradient(
-    45deg,
-    #4a90e2,
-    #e94e77,
-    #50e3c2
-  ); /* Gradiente com 3 cores */
-  background-size: 300% 300%; /* Ajustado para 300% */
-  animation: gradient-animation 15s ease infinite;
+  background: linear-gradient(135deg, #ff8c42, #d72638, #3b83ca);
+  background-size: 400% 400%;
+  animation: gradient-animation 16s ease-in-out infinite;
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 50% 70%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  75% {
+    background-position: 50% 30%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 /* Estilo para a área de drop */
