@@ -91,29 +91,29 @@ const Main = () => {
             onChange={handleFileChange}
             accept=".pdf"
           />
-          <div className="flex items-center justify-center mb-4">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-12 h-12 text-gray-500"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M9 8.25H7.5a2.25 2.25 0 0 0-2.25 2.25v9a2.25 2.25 0 0 0 2.25 2.25h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25H15m0-3-3-3m0 0-3 3m3-3V15"
-              />
-            </svg>
-          </div>
           <div className="text-center">
+            <div className="flex items-center justify-center mb-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-12 h-12 text-gray-500"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9 8.25H7.5a2.25 2.25 0 0 0-2.25 2.25v9a2.25 2.25 0 0 0 2.25 2.25h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25H15m0-3-3-3m0 0-3 3m3-3V15"
+                />
+              </svg>
+            </div>
             <div className="text-gray-600 text-lg sm:text-xl">
-              Solte o PDF aqui ou clique para fazer upload
+              Faça upload aqui
             </div>
           </div>
         </div>
-        <p className="text-sm sm:text-base md:text-lg text-zinc-800 font-mono">
+        <p className="text-sm sm:text-base md:text-lg text-black-900 font-mono p-8">
           OBS: APLICAÇÃO NA VERSÃO BETA, TOKENS LIMITADOS, EVITE O USO DE PDFs
           GRANDES, OBRIGADO.
         </p>
