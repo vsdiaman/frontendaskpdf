@@ -12,7 +12,7 @@ const Main = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = useDispatch();
-  const { uploading, fileUrl, pdfId } = useSelector((state) => state.file);
+  const { uploading, fileUrl, fileId } = useSelector((state) => state.file);
 
   const { handleDrop, handleDragOver, handleDragEnter, handleDragLeave } =
     useDragAndDrop(setDragging, (file) => dispatch(uploadFile(file)));
@@ -47,8 +47,8 @@ const Main = () => {
         await dispatch(uploadFile(file));
         console.log("Uploaded file");
         console.log("File URL:", file); // Verifique o valor de fileUrl
-        console.log("PDF ID:", pdfId); // Verifique o valor de pdfId
-        navigate("/chat", { state: { fileUrl, pdfId } });
+        console.log("PDF ID:", fileId); // Verifique o valor de pdfId
+        navigate("/chat", { state: { fileUrl, fileId } });
       } catch (error) {
         console.error("Error uploading file:", error);
       } finally {
