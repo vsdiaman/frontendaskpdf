@@ -9,6 +9,7 @@ import axios from "axios";
 import { Linkedin, Instagram } from "lucide-react";
 import "@react-pdf-viewer/core/lib/styles/index.css";
 import backendUrls from "../config/config.js";
+import BackButton from "../components/BackButton.js";
 
 const ChatPage = () => {
   const messagesEndRef = useRef(null);
@@ -163,7 +164,7 @@ const ChatPage = () => {
 
   return (
     <div className="flex flex-col bg-gradient-animation h-screen overflow-hidden p-4">
-      <div className="flex-1 flex flex-col h-full p-4 bg-white rounded-3xl shadow-sm m-2">
+      <div className="flex-1 flex flex-col h-full p-4 bg-white rounded-3xl shadow-sm ">
         {/* Chat Header */}
         <header className="bg-white p-2 sm:p-4 text-gray-100">
           <h1 className="mb-2 text-xl sm:text-2xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 dark:text-white">
@@ -173,7 +174,6 @@ const ChatPage = () => {
             , IA poderosa.
           </h1>
         </header>
-
         {/* Chat Messages */}
         <div className="flex-1 overflow-y-auto p-4">
           {messages.map((msg, index) => (
@@ -195,11 +195,11 @@ const ChatPage = () => {
               {/* Referência para rolar automaticamente */}
               <div ref={messagesEndRef} />
               <div
-                className={`flex flex max-w-[75%] ${
+                className={`flex flex max-w-[65%] p-4 ${
                   msg.fromUser
-                    ? "bg-gray-500 text-white"
-                    : "bg-gray-300 text-black"
-                } rounded-lg p-3 gap-3`}
+                    ? "border-solid border-[1px] bg-gray-50 text-black font-mono"
+                    : "text-black text-justify leading-relaxed tracking-normal font-mono"
+                } rounded-full p-3 gap-3`}
               >
                 {msg.isLoading ? (
                   <svg
@@ -226,7 +226,7 @@ const ChatPage = () => {
               </div>
 
               {msg.fromUser && (
-                <div className="flex-shrink-0 w-8 h-8 rounded-full overflow-hidden ml-2">
+                <div className="flex-shrink-0 w-8 h-8 rounded-full overflow-hidden ml-2 font-mono">
                   <img
                     src="https://storage.googleapis.com/support-forums-api/avatar/profile-67814438-6910661730522761562.png"
                     alt="User Avatar"
@@ -239,10 +239,10 @@ const ChatPage = () => {
         </div>
 
         {/* Message Input - FIXADO NA BASE */}
-        <div className="sticky bottom-0 bg-white w-full p-4  border-gray-300">
+        <div className="sticky bottom-0 bg-white w-full p-4">
           <form onSubmit={handleSendMessage} className="flex w-full">
             <input
-              className="bg-gray-200 py-3 w-full rounded-full text-gray placeholder-gray-400 p-6"
+              className=" border-solid border-[1px] border-gray-200 focus:outline-none py-3 w-full rounded-full  text-gray placeholder-gray-300 p-6"
               type="text"
               placeholder="Type your message here..."
               value={inputValue}
@@ -250,34 +250,27 @@ const ChatPage = () => {
             />
             <button
               type="submit"
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full ml-2"
+              className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded-full ml-2"
             >
               Enviar
             </button>
           </form>
+          <BackButton />
         </div>
-      </div>
-
-      <footer className="bg-white rounded-3xl shadow-sm dark:bg-gray-900 m-2">
-        <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
-          <div className="flex flex-col items-center sm:flex-row sm:justify-between">
-            {/* Logo */}
-            <a
-              href="https://flowbite.com/"
-              className="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse"
-            >
-              <img
-                src="https://cdn1.iconfinder.com/data/icons/color-bold-style/21/43-512.png"
-                className="h-8"
-                alt="Flowbite Logo"
-              />
-              <span className="self-center text-xl sm:text-2xl font-semibold whitespace-nowrap dark:text-white">
-                AskPdf
-              </span>
-            </a>
+        <footer className="bg-white rounded-lg shadow-sm m-4 dark:bg-gray-800">
+          <div className="w-full mx-auto max-w-screen-xl p-4 flex flex-wrap items-center justify-between text-center md:text-left">
+            {/* Texto e Direitos Autorais */}
+            <span className="text-sm text-gray-500 dark:text-gray-400 w-full md:w-auto mb-4 md:mb-0">
+              © 2025{" "}
+              <a href="https://flowbite.com/" className="hover:underline">
+                AskPDF™
+              </a>
+              &nbsp; •&nbsp;
+              <a>All Rights Reserved.</a>
+            </span>
 
             {/* Ícones Sociais */}
-            <ul className="flex space-x-4">
+            <ul className="flex justify-center md:justify-end space-x-4 w-full md:w-auto">
               <li>
                 <a
                   href="https://www.linkedin.com/in/vitordiamantino/"
@@ -298,19 +291,8 @@ const ChatPage = () => {
               </li>
             </ul>
           </div>
-
-          <hr className="my-6 border-gray-200 dark:border-gray-700 lg:my-8" />
-
-          {/* Copyright */}
-          <span className="block text-sm text-gray-500 text-center dark:text-gray-400">
-            © 2025{" "}
-            <a href="https://flowbite.com/" className="hover:underline">
-              Vitor Diamantino
-            </a>
-            . All Rights Reserved.
-          </span>
-        </div>
-      </footer>
+        </footer>
+      </div>
     </div>
   );
 };

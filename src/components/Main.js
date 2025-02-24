@@ -59,15 +59,15 @@ const Main = () => {
 
   return (
     <div className="h-screen bg-gradient-animation flex flex-col items-center justify-center p-4">
-      <div className="w-full max-w-4xl text-center">
+      <div className="w-full max-w-6xl text-center">
         <div className="mb-8">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-4">
+          <h1 className="text-6xl sm:text-5xl md:text-8xl lg:text-8xl font-bold text-gray-900 mb-6">
             Converse com qualquer PDF
           </h1>
-          <p className="text-sm sm:text-base md:text-lg text-zinc-100 font-mono">
+          <p className="text-sm sm:text-base md:text-lg font-mono text-gray-600">
             Junte-se a milhões de estudantes, pesquisadores e profissionais para
           </p>
-          <p className="text-sm sm:text-base md:text-lg text-zinc-100 font-mono">
+          <p className="text-sm sm:text-base md:text-lg  font-mono text-gray-600">
             responder perguntas instantaneamente e compreender pesquisas com IA
           </p>
         </div>
@@ -113,10 +113,6 @@ const Main = () => {
             </div>
           </div>
         </div>
-        <p className="text-sm sm:text-base md:text-lg text-black-900 font-mono p-8">
-          OBS: APLICAÇÃO NA VERSÃO BETA, TOKENS LIMITADOS, EVITE O USO DE PDFs
-          GRANDES, OBRIGADO.
-        </p>
       </div>
     </div>
   );
