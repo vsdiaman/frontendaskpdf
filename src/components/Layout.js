@@ -93,14 +93,35 @@ const Layout = () => {
 
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-              {isLoading && <Loader />} {/* Mostra o loader enquanto carrega */}
               <button
                 onClick={handleClick}
                 disabled={isLoading}
                 className="relative inline-flex items-center justify-center p-1 mb-2 me-2 overflow-hidden text-lg font-semibold text-gray-900 rounded-full group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-bold"
               >
-                <span className="relative px-8 py-4 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-full group-hover:bg-transparent group-hover:dark:bg-transparent">
-                  {isLoading ? "Carregando..." : "Experimente, é grátis."}
+                <span className="relative px-8 py-4 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-full group-hover:bg-transparent group-hover:dark:bg-transparent flex items-center gap-2">
+                  {isLoading ? (
+                    <>
+                      <svg
+                        className="size-5 animate-spin"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <circle
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                          strokeDasharray="31.4 31.4"
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                      Carregando...
+                    </>
+                  ) : (
+                    "Experimente, é grátis."
+                  )}
                 </span>
               </button>
             </motion.div>
