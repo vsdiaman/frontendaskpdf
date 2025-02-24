@@ -71,7 +71,7 @@ const Pricing = () => {
             key={tier.id}
             className={classNames(
               tier.featured
-                ? "relative bg-gray-900 shadow-2xl"
+                ? "relative bg-gray-800 shadow-2xl"
                 : "bg-white/60 sm:mx-8 lg:mx-0",
               tier.featured
                 ? ""
