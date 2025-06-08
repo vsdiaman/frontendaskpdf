@@ -1,5 +1,5 @@
 const backendUrls = {
-  production: "https://backend-chatpdf-production.up.railway.app",
+  production: "https://backend-chatpdf.onrender.com",
   local: "http://localhost:4000",
 };
 
