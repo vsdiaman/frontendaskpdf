@@ -62,13 +62,15 @@ const Main = () => {
       <div className="w-full max-w-6xl text-center">
         <div className="mb-8">
           <h1 className="text-6xl sm:text-5xl md:text-8xl lg:text-8xl font-bold text-gray-900 mb-6">
-            Converse com qualquer PDF
+            Envie seu documento, contrato ou o que desejar
           </h1>
           <p className="text-sm sm:text-base md:text-lg font-mono text-gray-600">
-            Junte-se a milhões de estudantes, pesquisadores e profissionais para
+            A Doutora.IA está pronta para analisar contratos, petições, extratos
+            e responder suas dúvidas com clareza.
           </p>
           <p className="text-sm sm:text-base md:text-lg  font-mono text-gray-600">
-            responder perguntas instantaneamente e compreender pesquisas com IA
+            Basta fazer o upload e começar a conversa com sua assistente
+            jurídica inteligente.
           </p>
         </div>
         <div
@@ -109,7 +111,7 @@ const Main = () => {
               </svg>
             </div>
             <div className="text-gray-600 text-lg sm:text-xl">
-              Faça upload aqui
+              Clique ou arraste um arquivo PDF aqui
             </div>
           </div>
         </div>

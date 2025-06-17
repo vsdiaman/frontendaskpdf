@@ -3,32 +3,35 @@ import { CheckIcon } from "@heroicons/react/20/solid";
 
 const tiers = [
   {
-    name: "Free",
-    id: "tier-hobby",
+    name: "Plano Gratuito",
+    id: "tier-free",
     href: "#",
-    priceMonthly: "$0",
+    priceMonthly: "R$0",
     description:
-      "O plano perfeito se você está começando a usar nosso produto.",
+      "Ideal para quem precisa de orientação básica ou está conhecendo a Doutora.IA.",
     features: [
-      "Acesso limitado a consultas de PDFs",
-      "5 consultas diárias",
-      "Suporte comunitário",
-      "Ideal para estudantes ocasionais",
+      "2 análises de documentos por dia",
+      "Upload limitado a 1 documento por vez",
+      "Respostas claras sobre cláusulas e obrigações",
+      "Explicações jurídicas com linguagem simples",
+      "Suporte comunitário via FAQ",
     ],
     featured: false,
   },
   {
-    name: "Hobby",
-    id: "tier-enterprise",
+    name: "Plano PRO",
+    id: "tier-pro",
     href: "#",
-    priceMonthly: "$9",
-    description: "Para quem precisa de mais poder e flexibilidade!",
+    priceMonthly: "R$89,90",
+    description:
+      "Para quem precisa de ajuda jurídica frequente, com suporte completo, histórico salvo e análises simultâneas.",
     features: [
-      "Acesso ilimitado a consultas de PDFs",
-      "Prioridade nas respostas (mais rápido!)",
-      "Suporte Premium via e-mail",
-      "Upload de arquivos maiores",
-      "Melhor para estudantes, pesquisadores e quem usa frequentemente!",
+      "Consultas ilimitadas por mês",
+      "Análises simultâneas de múltiplos documentos",
+      "Suporte prioritário com equipe especializada",
+      "Upload de extratos, contratos, petições e mais",
+      "Histórico de interações e documentos analisados",
+      "Respostas otimizadas com IA jurídica treinada",
     ],
     featured: true,
   },
@@ -50,20 +53,17 @@ const Pricing = () => {
             clipPath:
               "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
           }}
-          className="mx-auto aspect-1155/678 w-[72.1875rem] bg-linear-to-tr from-[#ff80b5] to-[#9089fc] opacity-30"
+          className="mx-auto aspect-1155/678 w-[72.1875rem] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30"
         />
       </div>
       <div className="mx-auto max-w-4xl text-center">
-        {/* <h2 className="text-base/7 font-semibold text-indigo-600">Preços</h2> */}
-        <p className="mt-2 text-5xl font-semibold tracking-tight text-balance text-gray-900 sm:text-6xl">
-          Escolha o plano certo para você
+        <p className="mt-2 text-5xl font-semibold tracking-tight text-gray-900 sm:text-6xl">
+          Escolha o plano ideal para sua necessidade jurídica
         </p>
       </div>
-      <p className="mx-auto mt-6 max-w-2xl text-center text-lg font-medium text-pretty text-gray-600 sm:text-xl/8">
-        Transforme seus PDFs em conhecimento! 📚🔍 Encontre respostas
-        instantâneas nos seus livros, apostilas e materiais de estudo em PDF com
-        a ajuda da inteligência artificial. Pare de perder tempo procurando –
-        aprenda de forma rápida, prática e eficiente! 🚀
+      <p className="mx-auto mt-6 max-w-2xl text-center text-lg font-medium text-gray-600 sm:text-xl">
+        Com a Doutora.IA você tem acesso a uma advogada virtual inteligente,
+        acessível e sempre pronta para ajudar.
       </p>
       <div className="mx-auto mt-16 grid max-w-lg grid-cols-1 items-center gap-y-6 sm:mt-20 sm:gap-y-0 lg:max-w-4xl lg:grid-cols-2">
         {tiers.map((tier, tierIdx) => (
@@ -85,7 +85,7 @@ const Pricing = () => {
               id={tier.id}
               className={classNames(
                 tier.featured ? "text-indigo-400" : "text-indigo-600",
-                "text-base/7 font-semibold"
+                "text-base font-semibold"
               )}
             >
               {tier.name}
@@ -105,13 +105,13 @@ const Pricing = () => {
                   "text-base"
                 )}
               >
-                /month
+                /mês
               </span>
             </p>
             <p
               className={classNames(
                 tier.featured ? "text-gray-300" : "text-gray-600",
-                "mt-6 text-base/7"
+                "mt-6 text-base"
               )}
             >
               {tier.description}
@@ -120,7 +120,7 @@ const Pricing = () => {
               role="list"
               className={classNames(
                 tier.featured ? "text-gray-300" : "text-gray-600",
-                "mt-8 space-y-3 text-sm/6 sm:mt-10"
+                "mt-8 space-y-3 text-sm sm:mt-10"
               )}
             >
               {tier.features.map((feature) => (
@@ -141,12 +141,12 @@ const Pricing = () => {
               aria-describedby={tier.id}
               className={classNames(
                 tier.featured
-                  ? "bg-primary-500 text-white shadow-xs hover:bg-primary-400 focus-visible:outline-indigo-500"
+                  ? "bg-indigo-500 text-white shadow-xs hover:bg-indigo-400 focus-visible:outline-indigo-500"
                   : "text-indigo-600 ring-1 ring-indigo-200 ring-inset hover:ring-indigo-300 focus-visible:outline-indigo-600",
                 "mt-8 block rounded-full px-3.5 py-2.5 text-center text-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 sm:mt-10"
               )}
             >
-              Get started today
+              Comece agora
             </a>
           </div>
         ))}
@@ -154,23 +154,5 @@ const Pricing = () => {
     </div>
   );
 };
-
-const plans = [
-  {
-    name: "Basic",
-    price: "$9/mo",
-    features: ["10GB Storage", "1 User", "Basic Support"],
-  },
-  {
-    name: "Pro",
-    price: "$19/mo",
-    features: ["50GB Storage", "5 Users", "Priority Support"],
-  },
-  {
-    name: "Enterprise",
-    price: "$49/mo",
-    features: ["Unlimited Storage", "Unlimited Users", "24/7 Support"],
-  },
-];
 
 export default Pricing;

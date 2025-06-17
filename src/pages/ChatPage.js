@@ -169,7 +169,7 @@ const ChatPage = () => {
         <header className="bg-white p-2 sm:p-4 text-gray-100">
           <h1 className="mb-2 text-xl sm:text-2xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 dark:text-white">
             <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
-              PDFs mais inteligentes
+              Acessoria inteligente
             </span>
             , IA poderosa.
           </h1>
@@ -238,61 +238,46 @@ const ChatPage = () => {
           ))}
         </div>
 
-        {/* Message Input - FIXADO NA BASE */}
-        <div className="sticky bottom-0 bg-white w-full p-4">
-          <form onSubmit={handleSendMessage} className="flex w-full">
-            <input
-              className=" border-solid border-[1px] border-gray-200 focus:outline-none py-3 w-full rounded-full  text-gray placeholder-gray-300 p-6"
-              type="text"
-              placeholder="Type your message here..."
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-            />
-            <button
-              type="submit"
-              className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded-full ml-2"
-            >
-              Enviar
-            </button>
-          </form>
-          <BackButton />
+        {/* Message Input */}
+        <div className="flex items-center gap-2 px-4 py-2 bg-white border-t">
+          <input
+            type="text"
+            placeholder="Digite sua dúvida jurídica..."
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            className="flex-grow border border-gray-300 rounded-full px-3 py-1 text-sm focus:outline-none"
+          />
+          <button
+            onClick={handleSendMessage}
+            className="bg-blue-500 hover:bg-blue-400 text-white text-sm font-semibold px-4 py-1 rounded-full"
+          >
+            Enviar
+          </button>
         </div>
-        <footer className="bg-white rounded-lg shadow-sm m-4 dark:bg-gray-800">
-          <div className="w-full mx-auto max-w-screen-xl p-4 flex flex-wrap items-center justify-between text-center md:text-left">
-            {/* Texto e Direitos Autorais */}
-            <span className="text-sm text-gray-500 dark:text-gray-400 w-full md:w-auto mb-4 md:mb-0">
-              © 2025{" "}
-              <a href="https://flowbite.com/" className="hover:underline">
-                AskPDF™
-              </a>
-              &nbsp; •&nbsp;
-              <a>All Rights Reserved.</a>
-            </span>
-
-            {/* Ícones Sociais */}
-            <ul className="flex justify-center md:justify-end space-x-4 w-full md:w-auto">
-              <li>
-                <a
-                  href="https://www.linkedin.com/in/vitordiamantino/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Linkedin className="w-6 h-6 text-blue-600 hover:text-blue-800 transition duration-300" />
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.instagram.com/vitor.diamantino/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Instagram className="w-6 h-6 text-pink-500 hover:text-pink-700 transition duration-300" />
-                </a>
-              </li>
-            </ul>
-          </div>
-        </footer>
       </div>
+      <BackButton />
+      {/* Footer */}
+      <footer className="flex items-center justify-between bg-white text-gray-500 text-xs p-2 mt-1 rounded-lg shadow-inner">
+        <span>© 2025 Doutora.IA</span>
+        <div className="flex space-x-2">
+          <a
+            href="https://linkedin.com/in/vitordiamantino"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-blue-700"
+          >
+            <Linkedin className="w-4 h-4" />
+          </a>
+          <a
+            href="https://instagram.com/vitor.diamantino"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-pink-600"
+          >
+            <Instagram className="w-4 h-4" />
+          </a>
+        </div>
+      </footer>
     </div>
   );
 };
