@@ -56,12 +56,12 @@ const Layout = () => {
         ></div>
       </div>
 
-      <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-36 text-center">
+      <div className="mx-auto max-w-7xl pt-48 pb-32 sm:pt-64 sm:pb-48 lg:pt-72 lg:pb-36 text-center">
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
-          className="w-full text-center text-5xl sm:text-8xl font-extrabold tracking-tight text-gray-900 dark:text-white"
+          className="w-full text-center text-6xl sm:text-9xl font-extrabold tracking-tight text-gray-900 dark:text-white"
         >
           Sua Advogada Virtual de Confiança
         </motion.h1>
