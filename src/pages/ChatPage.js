@@ -29,7 +29,6 @@ const ChatPage = () => {
     initialFileUrl || fileUrl
   );
   const [uploadedPdfId, setUploadedPdfId] = useState(initialPdfId || pdfId);
-  const [isStreaming, setIsStreaming] = useState(false);
 
   const pdfjsVersion = "2.16.105";
   const [isLoading, setIsLoading] = useState(false);
@@ -239,31 +238,25 @@ const ChatPage = () => {
         </div>
 
         {/* Message Input */}
-        <div className="flex items-center gap-2 px-4 py-2 bg-white border-t">
+        <form /* ← mudou de <div> para <form> */
+          onSubmit={handleSendMessage}
+          className="flex items-center gap-2 px-4 py-2 bg-white border-t"
+        >
           <input
             type="text"
             placeholder="Digite sua dúvida jurídica..."
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" && !e.shiftKey) {
-                e.preventDefault(); // evita quebra de linha
-                handleSendMessage(e); // dispara o mesmo envio
-              }
-            }}
             className="flex-grow border border-gray-300 rounded-full px-3 py-1 text-sm focus:outline-none"
-            disabled={isStreaming}
           />
+
           <button
-            type="submit"
-            disabled={isStreaming}
-            className={`px-4 py-1 rounded-full text-sm font-semibold text-white ${
-              isStreaming ? "bg-gray-400" : "bg-blue-500 hover:bg-blue-400"
-            }`}
+            type="submit" /* ← importante! */
+            className="bg-blue-500 hover:bg-blue-400 text-white text-sm font-semibold px-4 py-1 rounded-full"
           >
-            {isStreaming ? "Escrevendo…" : "Enviar"}
+            Enviar
           </button>
-        </div>
+        </form>
       </div>
       <BackButton />
       {/* Footer */}
