@@ -116,7 +116,6 @@ const ChatPage = () => {
       return;
     }
 
-    // Adiciona a mensagem do usuário e um placeholder da IA com o spinner
     setMessages((prevMessages) => [
       ...prevMessages,
       { text: inputValue, fromUser: true },
